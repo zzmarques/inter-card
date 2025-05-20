@@ -1,0 +1,93 @@
+@use 'vars';
+
+
+main {
+    height: 100vh;
+
+    .container-sec1 {
+        
+        width: 100%;
+        height: 230px;
+        
+        background-image: url('../assets/images/bg-main-mobile.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        .container-cards {
+            max-width: 375px;
+            height: 100%;
+            margin: 0 auto;
+            position: relative;
+        
+            .card-back {
+                position: absolute;
+                top: 30px;
+                right: 20px;
+                width: 280px;
+                height: 154px;
+                background-image: url('../assets/images/bg-card-back.png');
+                background-repeat: no-repeat;
+                background-size: contain;
+
+                .acct-cvc {
+                    
+                    font-size: 10px;
+                    letter-spacing: 1.3px;
+                    color: white;
+                    position: absolute;
+
+                    top: 49%;
+                    right: 35px;
+                    
+                    transform: translateY(-49%);
+                }
+            }
+
+            .card-front {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                position: absolute;
+                bottom: -41px;
+                left: 20px;
+                width: 280px;
+                height: 154px;
+                padding: 20px;
+                background-image: url('../assets/images/bg-card-front.png');
+                background-repeat: no-repeat;
+                background-size: contain;
+
+                .container-logo {
+                    img {
+                        width: 50px;
+                    }
+                }
+
+                .content-card {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 15px;
+
+                    .acct-num {
+                        font-size: 18px;
+                        text-transform: uppercase;
+                        letter-spacing: 2px;
+                        color: white;
+                    }
+                    .container-nd {
+                        display: flex;
+                        justify-content: space-between;
+
+                        .acct-name,
+                        .acct-date {
+                            font-size: 11px;
+                            text-transform: uppercase;
+                            letter-spacing: 1.3px;
+                            color: white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
