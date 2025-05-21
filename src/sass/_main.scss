@@ -3,7 +3,6 @@
 
 main {
     height: 100vh;
-
     .container-sec1 {
         
         width: 100%;
@@ -18,7 +17,6 @@ main {
             height: 100%;
             margin: 0 auto;
             position: relative;
-        
             .card-back {
                 position: absolute;
                 top: 30px;
@@ -87,6 +85,93 @@ main {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    .container-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        height: calc(100% - 230px);
+        
+
+        .actt-form {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 375px;
+            padding: 50px 20px;
+
+            .form-group {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                label {
+                    text-transform: uppercase;
+                    font-size: 15px;
+                    font-weight: 500;
+                    color: vars.$purple-950;
+                }
+
+                input {
+                    height: 60px;
+                    border-radius: 8px;
+                    padding-left: 15px;
+                    border: 2px solid vars.$gray-200;
+                    outline: none;
+                    
+                    font-size: 18px;
+                    font-weight: 500;
+                    color: vars.$purple-950;
+
+                    &::placeholder {
+                        color: vars.$gray-400;
+                    }
+
+                    &:focus {
+                        border-image: vars.$linear-gradient;
+                        border-image-slice: 1;
+                        border-width: 2px;
+                        border-style: solid;
+                    }
+
+                }
+            }
+
+            .container-dc {
+                display: flex;
+                gap: 10px;
+
+                .container-mm-yy {
+                    display: flex;
+                    gap: 10px;
+
+                    input {
+                        width: 80px;
+                    }
+                }
+
+                .form-cvc {
+
+                    input {
+                        width: 100%;
+                    }
+                }
+            }
+
+            .btn {
+                width: 100%;
+                height: 60px;
+                background-color: vars.$purple-950;
+                border-radius: 8px;
+
+                font-size: 18px;
+                font-weight: 500;
+                color: vars.$white-color;
+                border: 0;
             }
         }
     }
