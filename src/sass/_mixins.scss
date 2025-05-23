@@ -1,0 +1,11 @@
+@mixin center {
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+@mixin desktop {
+    @media (width >= 1024px) {
+        @content;
+    }
+} 

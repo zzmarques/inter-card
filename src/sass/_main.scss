@@ -1,22 +1,37 @@
 @use 'vars';
-
+@use 'mixins';
 
 main {
     height: 100vh;
+
+    @include mixins.desktop {
+        display: flex;
+    }
+
     .container-sec1 {
-        
         width: 100%;
         height: 230px;
-        
         background-image: url('../assets/images/bg-main-mobile.png');
         background-repeat: no-repeat;
         background-size: cover;
+
+        @include mixins.desktop {
+            background-image: url('../assets/images/bg-main-desktop.png');
+            height: 100%;
+            width: 480px;
+        }
 
         .container-cards {
             max-width: 375px;
             height: 100%;
             margin: 0 auto;
             position: relative;
+            
+            @include mixins.desktop {
+                display: flex;
+                height: 375px;
+            }
+            
             .card-back {
                 position: absolute;
                 top: 30px;
@@ -26,6 +41,11 @@ main {
                 background-image: url('../assets/images/bg-card-back.png');
                 background-repeat: no-repeat;
                 background-size: contain;
+
+                @include mixins.desktop {
+                    bottom: 0;
+                    right: 0;
+                }
 
                 .acct-cvc {
                     
@@ -54,6 +74,11 @@ main {
                 background-image: url('../assets/images/bg-card-front.png');
                 background-repeat: no-repeat;
                 background-size: contain;
+
+                @include mixins.desktop {
+                    top: 0;
+                    left: 0;
+                }
 
                 .container-logo {
                     img {
@@ -96,6 +121,13 @@ main {
         align-items: center;
         height: calc(100% - 230px);
         
+        @include mixins.desktop {
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            max-width: 884px;
+            margin: 0 auto;
+        }
 
         .actt-form {
             display: flex;
@@ -103,6 +135,11 @@ main {
             gap: 30px;
             max-width: 375px;
             padding: 50px 20px;
+
+            @include mixins.desktop {
+                gap: 20px;
+                padding: 0;
+            }
 
             .form-group {
                 display: flex;
@@ -126,6 +163,10 @@ main {
                     font-size: 18px;
                     font-weight: 500;
                     color: vars.$purple-950;
+
+                    @include mixins.desktop {
+                        height: 50px;
+                    }
 
                     &::placeholder {
                         color: vars.$gray-400;
@@ -172,6 +213,10 @@ main {
                 font-weight: 500;
                 color: vars.$white-color;
                 border: 0;
+
+                @include mixins.desktop {
+                    height: 50px;
+                }
             }
         }
     }
