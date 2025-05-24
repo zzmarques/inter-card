@@ -165,7 +165,7 @@ main {
     .container-form {
         display: flex;
         flex-direction: column;
-        justify-content: flex-end;
+        justify-content: center;
         align-items: center;
         height: calc(100% - 230px);
         
@@ -182,7 +182,6 @@ main {
             flex-direction: column;
             gap: 30px;
             max-width: 375px;
-            padding: 50px 20px;
 
             @include mixins.desktop {
                 gap: 20px;
@@ -193,6 +192,7 @@ main {
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
+                position: relative;
 
                 label {
                     text-transform: uppercase;
@@ -205,7 +205,7 @@ main {
                     height: 60px;
                     border-radius: 8px;
                     padding-left: 15px;
-                    border: 2px solid vars.$gray-200;
+                    border: 1px solid vars.$gray-200;
                     outline: none;
                     
                     font-size: 18px;
@@ -221,13 +221,31 @@ main {
                     }
 
                     &:focus {
-                        border: 2px solid transparent;
+                        border: 1px solid transparent;
                         background:
                             linear-gradient(white, white) padding-box,
                             vars.$linear-gradient border-box;
                         background-clip: padding-box, border-box;
                     }
 
+                }
+
+                input[type=number]::-webkit-inner-spin-button,
+                input[type=number]::-webkit-outer-spin-button {
+                    -webkit-appearance: none;
+                }
+
+                .error {
+                    border-color: vars.$red-400;
+                }
+
+                .err {
+                    position: absolute;
+                    left: 0;
+                    bottom: -22px;
+                    font-size: .9em;
+                    font-weight: 700;
+                    color: vars.$red-400;
                 }
             }
 
