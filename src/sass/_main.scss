@@ -221,10 +221,11 @@ main {
                     }
 
                     &:focus {
-                        border-image: vars.$linear-gradient;
-                        border-image-slice: 1;
-                        border-width: 2px;
-                        border-style: solid;
+                        border: 2px solid transparent;
+                        background:
+                            linear-gradient(white, white) padding-box,
+                            vars.$linear-gradient border-box;
+                        background-clip: padding-box, border-box;
                     }
 
                 }
