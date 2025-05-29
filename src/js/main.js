@@ -2,6 +2,11 @@
 const acttForm = document.querySelector('.actt-form');
 const inputs = acttForm.querySelectorAll('input');
 const btn = acttForm.querySelector('.btn');
+const formatNumberCard = (input) => {
+    const valueNumberInput = input.value.replace(/\D/g, '');
+    const formatted = valueNumberInput.replace(/(.{4})/g, '$1 ').trim();
+    input.value = formatted;
+};
 const maxDigits = (input, max) => {
     input.value = input.value.slice(0, max);
 };
@@ -44,9 +49,10 @@ const inputValidateEmpty = (input) => {
     showError(input);
 };
 const checkInput = (input) => {
-    if (!(input.type === 'text')) {
+    if (!(input.type === 'text' && input.id === 'name')) {
         if (input.id === "conta") {
-            maxDigits(input, 27);
+            formatNumberCard(input);
+            maxDigits(input, 19);
         }
         else if (input.id === "date" || input.id === "ano") {
             maxDigits(input, 2);
@@ -63,6 +69,7 @@ const checkInput = (input) => {
 inputs.forEach(input => {
     input.addEventListener('input', () => {
         checkInput(input);
+        inputValidateEmpty(input);
     });
 });
 acttForm.addEventListener('submit', e => {

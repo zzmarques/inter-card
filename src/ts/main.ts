@@ -5,6 +5,13 @@ const btn = acttForm.querySelector('.btn') as HTMLButtonElement;
 type ElementeHtml = HTMLElement | null;
 
 
+const formatNumberCard = (input: HTMLInputElement) => {
+    const valueNumberInput: string = input.value.replace(/\D/g, '');
+    const formatted: string = valueNumberInput.replace(/(.{4})/g, '$1 ').trim();
+
+    input.value = formatted;
+};
+
 const maxDigits = (input: HTMLInputElement, max: number) => {
     input.value = input.value.slice(0, max);
 };
@@ -58,9 +65,10 @@ const inputValidateEmpty = (input: HTMLInputElement) => {
 };
 
 const checkInput = (input: HTMLInputElement) => {
-    if (!(input.type === 'text')) {
+    if (!(input.type === 'text' && input.id === 'name')) {
         if (input.id === "conta") {
-            maxDigits(input, 27);
+            formatNumberCard(input);
+            maxDigits(input, 19);
         } else if (input.id === "date" || input.id === "ano") {
             maxDigits(input, 2);
         } else {
@@ -74,6 +82,7 @@ const checkInput = (input: HTMLInputElement) => {
 inputs.forEach(input => {
     input.addEventListener('input', () => {
         checkInput(input);
+        inputValidateEmpty(input);
     });
 });
 
