@@ -4,7 +4,6 @@ const btn = acttForm.querySelector('.btn') as HTMLButtonElement;
 
 type ElementeHtml = HTMLElement | null;
 
-
 const formatNumberCard = (input: HTMLInputElement) => {
     const valueNumberInput: string = input.value.replace(/\D/g, '');
     const formatted: string = valueNumberInput.replace(/(.{4})/g, '$1 ').trim();
@@ -19,15 +18,29 @@ const maxDigits = (input: HTMLInputElement, max: number) => {
 const msgError = (input: HTMLInputElement) => {
         const formGroup = input.closest('.form-group') as ElementeHtml;
         
-        if (formGroup) {
-            const spanExistente = formGroup.querySelector('span.err');
+        if (!(input.value !== '')) {
+            if (formGroup) {
 
-            if (!spanExistente) {
-                const spanError: string = `<span class="err">Cant't be blank</span>`;
+                const spanExistente = formGroup.querySelector('span.err');
+
+                if (!spanExistente) {
+                    const spanError: string = `<span class="err">Cant't be blank</span>`;
+                    input?.insertAdjacentHTML('afterend', spanError);
+                }
+
+                return;
+            }
+        } else {
+
+            if (input.type === 'text') {
+                const spanError: string = `<span class="err">Wrong format, letters only</span>`;
+                input.classList.add('err-t');
+                input?.insertAdjacentHTML('afterend', spanError);
+            } else {
+                const spanError: string = `<span class="err">Wrong format, numbers only</span>`;
+                input.classList.add('err-t');
                 input?.insertAdjacentHTML('afterend', spanError);
             }
-
-            return;
         }
         
 };
@@ -51,8 +64,23 @@ const showError = (input: HTMLInputElement) => {
 };
 
 const hiddenError = (input: HTMLInputElement) => {
+    if (input.classList.contains('err-t')) {
+        input.classList.remove('err-t');
+    }
+    
     input.classList.remove('error');
     removeMsgError(input);
+};
+
+const validateInvalidCharacters = (input: HTMLInputElement) => {
+    const cleanedName: boolean = /[^a-zA-Z\s]/.test(input.value);
+    
+    if (!cleanedName) {
+        hiddenError(input);
+        return;
+    } else {
+        showError(input);
+    }
 };
 
 const inputValidateEmpty = (input: HTMLInputElement) => {
@@ -75,14 +103,18 @@ const checkInput = (input: HTMLInputElement) => {
             maxDigits(input, 3);
         }
     } else {
-        maxDigits(input, 5);
+        maxDigits(input, 19);
+        validateInvalidCharacters(input);
     };
 };
 
 inputs.forEach(input => {
     input.addEventListener('input', () => {
         checkInput(input);
-        inputValidateEmpty(input);
+
+        if(input.value !== '' && !input.classList.contains('err-t')) {
+            hiddenError(input);
+        }
     });
 });
 

@@ -12,13 +12,27 @@ const maxDigits = (input, max) => {
 };
 const msgError = (input) => {
     const formGroup = input.closest('.form-group');
-    if (formGroup) {
-        const spanExistente = formGroup.querySelector('span.err');
-        if (!spanExistente) {
-            const spanError = `<span class="err">Cant't be blank</span>`;
+    if (!(input.value !== '')) {
+        if (formGroup) {
+            const spanExistente = formGroup.querySelector('span.err');
+            if (!spanExistente) {
+                const spanError = `<span class="err">Cant't be blank</span>`;
+                input === null || input === void 0 ? void 0 : input.insertAdjacentHTML('afterend', spanError);
+            }
+            return;
+        }
+    }
+    else {
+        if (input.type === 'text') {
+            const spanError = `<span class="err">Wrong format, letters only</span>`;
+            input.classList.add('err-t');
             input === null || input === void 0 ? void 0 : input.insertAdjacentHTML('afterend', spanError);
         }
-        return;
+        else {
+            const spanError = `<span class="err">Wrong format, numbers only</span>`;
+            input.classList.add('err-t');
+            input === null || input === void 0 ? void 0 : input.insertAdjacentHTML('afterend', spanError);
+        }
     }
 };
 const removeMsgError = (input) => {
@@ -37,8 +51,21 @@ const showError = (input) => {
     msgError(input);
 };
 const hiddenError = (input) => {
+    if (input.classList.contains('err-t')) {
+        input.classList.remove('err-t');
+    }
     input.classList.remove('error');
     removeMsgError(input);
+};
+const validateInvalidCharacters = (input) => {
+    const cleanedName = /[^a-zA-Z\s]/.test(input.value);
+    if (!cleanedName) {
+        hiddenError(input);
+        return;
+    }
+    else {
+        showError(input);
+    }
 };
 const inputValidateEmpty = (input) => {
     if (!(input.value === '')) {
@@ -62,14 +89,17 @@ const checkInput = (input) => {
         }
     }
     else {
-        maxDigits(input, 5);
+        maxDigits(input, 19);
+        validateInvalidCharacters(input);
     }
     ;
 };
 inputs.forEach(input => {
     input.addEventListener('input', () => {
         checkInput(input);
-        inputValidateEmpty(input);
+        if (input.value !== '' && !input.classList.contains('err-t')) {
+            hiddenError(input);
+        }
     });
 });
 acttForm.addEventListener('submit', e => {
