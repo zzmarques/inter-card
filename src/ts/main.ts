@@ -15,6 +15,24 @@ const maxDigits = (input: HTMLInputElement, max: number) => {
     input.value = input.value.slice(0, max);
 };
 
+const formatarDate = (input: HTMLInputElement) => {
+    const dateInput: number = +input.value;
+
+    if (input.id === 'ano') {
+        console.log(input);
+        
+        if (dateInput >= 1 && dateInput <= 100) {
+            input.value = dateInput < 10 ? '0' + dateInput : String(dateInput);
+        }
+    } else {
+        if(dateInput >= 1 && dateInput <= 12) {
+            input.value = dateInput < 10 ? '0' + dateInput : String(dateInput);
+        };
+    }
+
+    maxDigits(input, 2);
+};
+
 const msgError = (input: HTMLInputElement) => {
         const formGroup = input.closest('.form-group') as ElementeHtml;
         
@@ -98,7 +116,7 @@ const checkInput = (input: HTMLInputElement) => {
             formatNumberCard(input);
             maxDigits(input, 19);
         } else if (input.id === "date" || input.id === "ano") {
-            maxDigits(input, 2);
+            formatarDate(input);
         } else {
             maxDigits(input, 3);
         }

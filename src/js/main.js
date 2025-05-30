@@ -10,6 +10,22 @@ const formatNumberCard = (input) => {
 const maxDigits = (input, max) => {
     input.value = input.value.slice(0, max);
 };
+const formatarDate = (input) => {
+    const dateInput = +input.value;
+    if (input.id === 'ano') {
+        console.log(input);
+        if (dateInput >= 1 && dateInput <= 100) {
+            input.value = dateInput < 10 ? '0' + dateInput : String(dateInput);
+        }
+    }
+    else {
+        if (dateInput >= 1 && dateInput <= 12) {
+            input.value = dateInput < 10 ? '0' + dateInput : String(dateInput);
+        }
+        ;
+    }
+    maxDigits(input, 2);
+};
 const msgError = (input) => {
     const formGroup = input.closest('.form-group');
     if (!(input.value !== '')) {
@@ -17,7 +33,7 @@ const msgError = (input) => {
             const spanExistente = formGroup.querySelector('span.err');
             if (!spanExistente) {
                 const spanError = `<span class="err">Cant't be blank</span>`;
-                input === null || input === void 0 ? void 0 : input.insertAdjacentHTML('afterend', spanError);
+                input?.insertAdjacentHTML('afterend', spanError);
             }
             return;
         }
@@ -26,12 +42,12 @@ const msgError = (input) => {
         if (input.type === 'text') {
             const spanError = `<span class="err">Wrong format, letters only</span>`;
             input.classList.add('err-t');
-            input === null || input === void 0 ? void 0 : input.insertAdjacentHTML('afterend', spanError);
+            input?.insertAdjacentHTML('afterend', spanError);
         }
         else {
             const spanError = `<span class="err">Wrong format, numbers only</span>`;
             input.classList.add('err-t');
-            input === null || input === void 0 ? void 0 : input.insertAdjacentHTML('afterend', spanError);
+            input?.insertAdjacentHTML('afterend', spanError);
         }
     }
 };
@@ -82,7 +98,7 @@ const checkInput = (input) => {
             maxDigits(input, 19);
         }
         else if (input.id === "date" || input.id === "ano") {
-            maxDigits(input, 2);
+            formatarDate(input);
         }
         else {
             maxDigits(input, 3);
