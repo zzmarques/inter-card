@@ -15,22 +15,31 @@ const maxDigits = (input: HTMLInputElement, max: number) => {
     input.value = input.value.slice(0, max);
 };
 
-const formatarDate = (input: HTMLInputElement) => {
-    const dateInput: number = +input.value;
+const formatarNumbers = (input: HTMLInputElement) => {
+    const valueInput: number = +input.value;
 
-    if (input.id === 'ano') {
-        console.log(input);
-        
-        if (dateInput >= 1 && dateInput <= 100) {
-            input.value = dateInput < 10 ? '0' + dateInput : String(dateInput);
+    if (input.id === 'ano' || input.id === 'date') {
+        if (input.id === 'ano') {
+            if (valueInput >= 1 && valueInput <= 100) {
+                input.value = valueInput < 10 ? '0' + valueInput : String(valueInput);
+            }
+        } else {
+            if(valueInput >= 1 && valueInput <= 12) {
+                input.value = valueInput < 10 ? '0' + valueInput : String(valueInput);
+            };
         }
+        maxDigits(input, 2);
     } else {
-        if(dateInput >= 1 && dateInput <= 12) {
-            input.value = dateInput < 10 ? '0' + dateInput : String(dateInput);
-        };
-    }
+        if (valueInput >= 0) {
+            input.value = valueInput < 10 ? '00' + valueInput : String(valueInput);
+        }
 
-    maxDigits(input, 2);
+        if (input.value.length === 2) {
+            input.value = valueInput >= 10 ? '0' + valueInput : String(valueInput);
+        }
+        
+        maxDigits(input, 3);
+    }
 };
 
 const msgError = (input: HTMLInputElement) => {
@@ -116,9 +125,9 @@ const checkInput = (input: HTMLInputElement) => {
             formatNumberCard(input);
             maxDigits(input, 19);
         } else if (input.id === "date" || input.id === "ano") {
-            formatarDate(input);
+            formatarNumbers(input);
         } else {
-            maxDigits(input, 3);
+            formatarNumbers(input);
         }
     } else {
         maxDigits(input, 19);
