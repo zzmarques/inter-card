@@ -81,7 +81,7 @@ const removeMsgError = (input: HTMLInputElement) => {
         if (formGroup) {
             const inputFG = formGroup.querySelector('input') as HTMLInputElement;
             input === inputFG ? span.remove() : '';
-        };
+        }
     });
 };
 
@@ -114,7 +114,7 @@ const inputValidateEmpty = (input: HTMLInputElement) => {
     if(!(input.value === '')) {
         hiddenError(input);
         return;
-    };
+    }
 
     showError(input);
 };
@@ -132,7 +132,7 @@ const checkInput = (input: HTMLInputElement) => {
     } else {
         maxDigits(input, 19);
         validateInvalidCharacters(input);
-    };
+    }
 };
 
 const showDisplay = (input: HTMLInputElement) => {

@@ -69,7 +69,6 @@ const removeMsgError = (input) => {
             const inputFG = formGroup.querySelector('input');
             input === inputFG ? span.remove() : '';
         }
-        ;
     });
 };
 const showError = (input) => {
@@ -98,7 +97,6 @@ const inputValidateEmpty = (input) => {
         hiddenError(input);
         return;
     }
-    ;
     showError(input);
 };
 const checkInput = (input) => {
@@ -118,7 +116,6 @@ const checkInput = (input) => {
         maxDigits(input, 19);
         validateInvalidCharacters(input);
     }
-    ;
 };
 const showDisplay = (input) => {
     const [spanCvc, spanNumber, spanName, spanDate] = document.querySelectorAll('span.actt');
