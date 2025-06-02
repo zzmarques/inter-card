@@ -135,6 +135,29 @@ const checkInput = (input: HTMLInputElement) => {
     };
 };
 
+const showDisplay = (input: HTMLInputElement) => {
+    const [spanCvc, spanNumber, spanName, spanDate] = document.querySelectorAll<HTMLSpanElement>('span.actt');
+
+    if (input.id === "name" ) {
+        spanName.innerText = input.value;
+
+    } else if (input.id === "conta" ) {
+        spanNumber.innerText = input.value;
+
+    } else if (input.id === "date" || input.id === "ano") {
+        const mesInput = document.getElementById('date') as HTMLInputElement;
+        const anoInput = document.getElementById('ano') as HTMLInputElement;
+
+        const mes = mesInput?.value || '00';
+        const ano = anoInput?.value || '00';
+
+        spanDate.innerText = `${mes}/${ano}`;
+        
+    } else {
+        spanCvc.innerText = input.value;
+    }
+}
+
 inputs.forEach(input => {
     input.addEventListener('input', () => {
         checkInput(input);
@@ -142,6 +165,8 @@ inputs.forEach(input => {
         if(input.value !== '' && !input.classList.contains('err-t')) {
             hiddenError(input);
         }
+
+        showDisplay(input);
     });
 });
 

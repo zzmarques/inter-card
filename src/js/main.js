@@ -120,12 +120,32 @@ const checkInput = (input) => {
     }
     ;
 };
+const showDisplay = (input) => {
+    const [spanCvc, spanNumber, spanName, spanDate] = document.querySelectorAll('span.actt');
+    if (input.id === "name") {
+        spanName.innerText = input.value;
+    }
+    else if (input.id === "conta") {
+        spanNumber.innerText = input.value;
+    }
+    else if (input.id === "date" || input.id === "ano") {
+        const mesInput = document.getElementById('date');
+        const anoInput = document.getElementById('ano');
+        const mes = mesInput?.value || '00';
+        const ano = anoInput?.value || '00';
+        spanDate.innerText = `${mes}/${ano}`;
+    }
+    else {
+        spanCvc.innerText = input.value;
+    }
+};
 inputs.forEach(input => {
     input.addEventListener('input', () => {
         checkInput(input);
         if (input.value !== '' && !input.classList.contains('err-t')) {
             hiddenError(input);
         }
+        showDisplay(input);
     });
 });
 acttForm.addEventListener('submit', e => {
