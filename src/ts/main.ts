@@ -104,14 +104,21 @@ const validateInvalidCharacters = (input: HTMLInputElement) => {
     
     if (!cleanedName) {
         hiddenError(input);
-        return;
+        return false;
     } else {
         showError(input);
+        return true;
     }
 };
 
 const inputValidateEmpty = (input: HTMLInputElement) => {
+
     if(!(input.value === '')) {
+        if (input.id === 'name') {
+            const nameValid: boolean = validateInvalidCharacters(input);
+            if (nameValid) return;
+        }
+
         hiddenError(input);
         return;
     }
@@ -158,6 +165,9 @@ const showDisplay = (input: HTMLInputElement) => {
     }
 }
 
+const showMsgComplet = () => {
+};
+
 inputs.forEach(input => {
     input.addEventListener('input', () => {
         checkInput(input);
@@ -170,12 +180,33 @@ inputs.forEach(input => {
     });
 });
 
-acttForm.addEventListener('submit', e => {
-    e.preventDefault();
-});
-
 btn.addEventListener('click', () => {
     inputs.forEach(input => {
         inputValidateEmpty(input);
     });
 });
+
+acttForm.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const formComplet = () => {
+        const allInputsValid: boolean = [...inputs].every((input) => !input.classList.contains('error'));
+
+        const allNumberInputsFilled: boolean = [...inputs].every((input) => {
+            if (input.type === 'number') {
+                return +input.value !== 0;
+            }
+            return true;
+        });
+
+        if (allInputsValid && allNumberInputsFilled) {
+            showMsgComplet();
+        }
+
+    };
+
+    btn.addEventListener('click', () => {
+        formComplet();
+    });
+});
+

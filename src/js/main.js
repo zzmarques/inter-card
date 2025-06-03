@@ -86,14 +86,20 @@ const validateInvalidCharacters = (input) => {
     const cleanedName = /[^a-zA-Z\s]/.test(input.value);
     if (!cleanedName) {
         hiddenError(input);
-        return;
+        return false;
     }
     else {
         showError(input);
+        return true;
     }
 };
 const inputValidateEmpty = (input) => {
     if (!(input.value === '')) {
+        if (input.id === 'name') {
+            const nameValid = validateInvalidCharacters(input);
+            if (nameValid)
+                return;
+        }
         hiddenError(input);
         return;
     }
@@ -136,6 +142,9 @@ const showDisplay = (input) => {
         spanCvc.innerText = input.value;
     }
 };
+const showMsgComplet = () => {
+    console.log('ok');
+};
 inputs.forEach(input => {
     input.addEventListener('input', () => {
         checkInput(input);
@@ -145,11 +154,26 @@ inputs.forEach(input => {
         showDisplay(input);
     });
 });
-acttForm.addEventListener('submit', e => {
-    e.preventDefault();
-});
 btn.addEventListener('click', () => {
     inputs.forEach(input => {
         inputValidateEmpty(input);
+    });
+});
+acttForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const formComplet = () => {
+        const allInputsValid = [...inputs].every((input) => !input.classList.contains('error'));
+        const allNumberInputsFilled = [...inputs].every((input) => {
+            if (input.type === 'number') {
+                return +input.value !== 0;
+            }
+            return true;
+        });
+        if (allInputsValid && allNumberInputsFilled) {
+            showMsgComplet();
+        }
+    };
+    btn.addEventListener('click', () => {
+        formComplet();
     });
 });
