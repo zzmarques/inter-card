@@ -165,6 +165,10 @@ const showDisplay = (input: HTMLInputElement) => {
     }
 }
 
+const reload = () => {
+    location.reload();
+};
+
 const showMsgComplet = () => {
     const container: ElementeHtml = document.querySelector('.container-form');
     const containerComplete: string = `
@@ -176,12 +180,15 @@ const showMsgComplet = () => {
                 <h1>Thank you!</h1>
                 <h2>We've added your card details</h2>
             </div>
-            <button class="btn-cin">Continue</button>
+            <button class="btn-con">Continue</button>
         </div>
     `;
 
     acttForm?.remove();
     container?.insertAdjacentHTML('beforeend', containerComplete);
+
+    const btnCon: ElementeHtml = document.querySelector('.btn-con');
+    btnCon?.addEventListener('click', reload);
 };
 
 const formComplet = () => {
@@ -194,11 +201,13 @@ const formComplet = () => {
             return true;
         });
 
-        if (allInputsValid && allNumberInputsFilled) {
+        const numberCardValid: boolean = inputs[1].value !== '0000 0000 0000 0000';
+
+        if (allInputsValid && allNumberInputsFilled && numberCardValid) {
             showMsgComplet();
         }
 
-    };
+};
 
 inputs.forEach(input => {
     input.addEventListener('input', () => {

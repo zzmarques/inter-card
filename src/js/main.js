@@ -142,6 +142,9 @@ const showDisplay = (input) => {
         spanCvc.innerText = input.value;
     }
 };
+const reload = () => {
+    location.reload();
+};
 const showMsgComplet = () => {
     const container = document.querySelector('.container-form');
     const containerComplete = `
@@ -153,11 +156,13 @@ const showMsgComplet = () => {
                 <h1>Thank you!</h1>
                 <h2>We've added your card details</h2>
             </div>
-            <button class="btn-cin">Continue</button>
+            <button class="btn-con">Continue</button>
         </div>
     `;
     acttForm?.remove();
     container?.insertAdjacentHTML('beforeend', containerComplete);
+    const btnCon = document.querySelector('.btn-con');
+    btnCon?.addEventListener('click', reload);
 };
 const formComplet = () => {
     const allInputsValid = [...inputs].every((input) => !input.classList.contains('error'));
@@ -167,7 +172,8 @@ const formComplet = () => {
         }
         return true;
     });
-    if (allInputsValid && allNumberInputsFilled) {
+    const numberCardValid = inputs[1].value !== '0000 0000 0000 0000';
+    if (allInputsValid && allNumberInputsFilled && numberCardValid) {
         showMsgComplet();
     }
 };
