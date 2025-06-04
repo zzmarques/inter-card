@@ -143,7 +143,33 @@ const showDisplay = (input) => {
     }
 };
 const showMsgComplet = () => {
-    console.log('ok');
+    const container = document.querySelector('.container-form');
+    const containerComplete = `
+        <div class="container-complete">
+            <figure class="container-icon">
+                <img src="src/assets/images/icon-complete.svg" alt="icon-complete">
+            </figure>
+            <div class="container-text">
+                <h1>Thank you!</h1>
+                <h2>We've added your card details</h2>
+            </div>
+            <button class="btn-cin">Continue</button>
+        </div>
+    `;
+    acttForm?.remove();
+    container?.insertAdjacentHTML('beforeend', containerComplete);
+};
+const formComplet = () => {
+    const allInputsValid = [...inputs].every((input) => !input.classList.contains('error'));
+    const allNumberInputsFilled = [...inputs].every((input) => {
+        if (input.type === 'number') {
+            return +input.value !== 0;
+        }
+        return true;
+    });
+    if (allInputsValid && allNumberInputsFilled) {
+        showMsgComplet();
+    }
 };
 inputs.forEach(input => {
     input.addEventListener('input', () => {
@@ -154,26 +180,12 @@ inputs.forEach(input => {
         showDisplay(input);
     });
 });
+acttForm.addEventListener('submit', e => {
+    e.preventDefault();
+});
 btn.addEventListener('click', () => {
     inputs.forEach(input => {
         inputValidateEmpty(input);
     });
-});
-acttForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const formComplet = () => {
-        const allInputsValid = [...inputs].every((input) => !input.classList.contains('error'));
-        const allNumberInputsFilled = [...inputs].every((input) => {
-            if (input.type === 'number') {
-                return +input.value !== 0;
-            }
-            return true;
-        });
-        if (allInputsValid && allNumberInputsFilled) {
-            showMsgComplet();
-        }
-    };
-    btn.addEventListener('click', () => {
-        formComplet();
-    });
+    formComplet();
 });

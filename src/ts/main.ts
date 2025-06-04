@@ -166,30 +166,25 @@ const showDisplay = (input: HTMLInputElement) => {
 }
 
 const showMsgComplet = () => {
+    const container: ElementeHtml = document.querySelector('.container-form');
+    const containerComplete: string = `
+        <div class="container-complete">
+            <figure class="container-icon">
+                <img src="src/assets/images/icon-complete.svg" alt="icon-complete">
+            </figure>
+            <div class="container-text">
+                <h1>Thank you!</h1>
+                <h2>We've added your card details</h2>
+            </div>
+            <button class="btn-cin">Continue</button>
+        </div>
+    `;
+
+    acttForm?.remove();
+    container?.insertAdjacentHTML('beforeend', containerComplete);
 };
 
-inputs.forEach(input => {
-    input.addEventListener('input', () => {
-        checkInput(input);
-
-        if(input.value !== '' && !input.classList.contains('err-t')) {
-            hiddenError(input);
-        }
-
-        showDisplay(input);
-    });
-});
-
-btn.addEventListener('click', () => {
-    inputs.forEach(input => {
-        inputValidateEmpty(input);
-    });
-});
-
-acttForm.addEventListener('submit', e => {
-    e.preventDefault();
-
-    const formComplet = () => {
+const formComplet = () => {
         const allInputsValid: boolean = [...inputs].every((input) => !input.classList.contains('error'));
 
         const allNumberInputsFilled: boolean = [...inputs].every((input) => {
@@ -205,8 +200,26 @@ acttForm.addEventListener('submit', e => {
 
     };
 
-    btn.addEventListener('click', () => {
-        formComplet();
+inputs.forEach(input => {
+    input.addEventListener('input', () => {
+        checkInput(input);
+
+        if(input.value !== '' && !input.classList.contains('err-t')) {
+            hiddenError(input);
+        }
+
+        showDisplay(input);
     });
+});
+
+acttForm.addEventListener('submit', e => {
+    e.preventDefault();
+});
+
+btn.addEventListener('click', () => {
+    inputs.forEach(input => {
+        inputValidateEmpty(input);
+    });
+    formComplet();
 });
 
