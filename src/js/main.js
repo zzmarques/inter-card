@@ -49,13 +49,8 @@ const msgError = (input) => {
         }
     }
     else {
-        if (input.type === 'text') {
+        if (input.id === 'name') {
             const spanError = `<span class="err">Wrong format, letters only</span>`;
-            input.classList.add('err-t');
-            input?.insertAdjacentHTML('afterend', spanError);
-        }
-        else {
-            const spanError = `<span class="err">Wrong format, numbers only</span>`;
             input.classList.add('err-t');
             input?.insertAdjacentHTML('afterend', spanError);
         }
@@ -72,6 +67,15 @@ const removeMsgError = (input) => {
     });
 };
 const showError = (input) => {
+    if (input.id === 'conta' && input.value === '0000 0000 0000 0000') {
+        input.classList.add('error');
+        return;
+    }
+    if (input.type === 'number' && +input.value === 0 && input.value !== '') {
+        input.classList.add('error');
+        console.log(input.value);
+        return;
+    }
     input.classList.add('error');
     msgError(input);
 };
@@ -99,6 +103,14 @@ const inputValidateEmpty = (input) => {
             const nameValid = validateInvalidCharacters(input);
             if (nameValid)
                 return;
+        }
+        if (input.id === 'conta' && input.value === '0000 0000 0000 0000') {
+            showError(input);
+            return;
+        }
+        if (input.type === 'number' && +input.value === 0 && input.value !== '') {
+            showError(input);
+            return;
         }
         hiddenError(input);
         return;

@@ -59,12 +59,8 @@ const msgError = (input: HTMLInputElement) => {
             }
         } else {
 
-            if (input.type === 'text') {
+            if (input.id === 'name') {
                 const spanError: string = `<span class="err">Wrong format, letters only</span>`;
-                input.classList.add('err-t');
-                input?.insertAdjacentHTML('afterend', spanError);
-            } else {
-                const spanError: string = `<span class="err">Wrong format, numbers only</span>`;
                 input.classList.add('err-t');
                 input?.insertAdjacentHTML('afterend', spanError);
             }
@@ -86,6 +82,18 @@ const removeMsgError = (input: HTMLInputElement) => {
 };
 
 const showError = (input: HTMLInputElement) => {
+    if(input.id === 'conta' &&  input.value === '0000 0000 0000 0000') {
+        input.classList.add('error');
+        return;
+    }
+
+    if(input.type === 'number' && +input.value === 0 && input.value !== '') {
+        input.classList.add('error');
+        console.log(input.value);
+        
+        return;
+    }
+
     input.classList.add('error');
     msgError(input);
 };
@@ -117,6 +125,16 @@ const inputValidateEmpty = (input: HTMLInputElement) => {
         if (input.id === 'name') {
             const nameValid: boolean = validateInvalidCharacters(input);
             if (nameValid) return;
+        }
+
+        if(input.id === 'conta' &&  input.value === '0000 0000 0000 0000') {
+            showError(input);
+            return;
+        }
+
+        if(input.type === 'number' && +input.value === 0 && input.value !== '') {
+            showError(input);            
+            return;
         }
 
         hiddenError(input);
@@ -202,6 +220,7 @@ const formComplet = () => {
         });
 
         const numberCardValid: boolean = inputs[1].value !== '0000 0000 0000 0000';
+
 
         if (allInputsValid && allNumberInputsFilled && numberCardValid) {
             showMsgComplet();
