@@ -167,8 +167,11 @@ const showDisplay = (input: HTMLInputElement) => {
         spanName.innerText = input.value;
 
     } else if (input.id === "conta" ) {
-        spanNumber.innerText = input.value;
-
+        let rawValue = input.value.replace(/\D/g, '').slice(0, 16);
+        let paddedValue = rawValue.padStart(16, '0');
+        let formatted = paddedValue.match(/.{1,4}/g)?.join(' ') || '';
+        spanNumber.innerText = formatted;
+        
     } else if (input.id === "date" || input.id === "ano") {
         const mesInput = document.getElementById('date') as HTMLInputElement;
         const anoInput = document.getElementById('ano') as HTMLInputElement;
