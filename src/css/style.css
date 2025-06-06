@@ -161,7 +161,7 @@ main .container-form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: calc(100% - 230px);
+  height: 100%;
 }
 @media (width >= 1024px) {
   main .container-form {
@@ -176,7 +176,7 @@ main .container-form .actt-form {
   display: flex;
   flex-direction: column;
   gap: 30px;
-  max-width: 375px;
+  max-width: 330px;
 }
 @media (width >= 1024px) {
   main .container-form .actt-form {
@@ -226,6 +226,9 @@ main .container-form .actt-form .form-group input[type=number]::-webkit-outer-sp
 main .container-form .actt-form .form-group .error {
   border-color: hsl(0, 100%, 66%);
 }
+main .container-form .actt-form .form-group .error:focus {
+  border: 1px solid hsl(0, 100%, 66%);
+}
 main .container-form .actt-form .form-group .err {
   position: absolute;
   left: 0;
@@ -233,6 +236,12 @@ main .container-form .actt-form .form-group .err {
   font-size: 0.9em;
   font-weight: 700;
   color: hsl(0, 100%, 66%);
+}
+@media (width >= 1024px) {
+  main .container-form .actt-form .form-group .err {
+    font-size: 0.8em;
+    bottom: -17px;
+  }
 }
 main .container-form .actt-form .container-dc {
   display: flex;
