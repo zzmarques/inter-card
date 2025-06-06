@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prebuild": "chmod +x ./node_modules/typescript/bin/tsc",
-    "build": "tsc",
+    "build": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
