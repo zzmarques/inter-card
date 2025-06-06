@@ -30,7 +30,7 @@ const formatarNumbers = (input: HTMLInputElement) => {
         }
         maxDigits(input, 2);
     } else {
-        if (valueInput >= 0) {
+        if (valueInput >= 1) {
             input.value = valueInput < 10 ? '00' + valueInput : String(valueInput);
         }
 
@@ -126,8 +126,8 @@ const inputValidateEmpty = (input: HTMLInputElement) => {
             const nameValid: boolean = validateInvalidCharacters(input);
             if (nameValid) return;
         }
-
-        if(input.id === 'conta' &&  input.value === '0000 0000 0000 0000') {
+        
+        if(input.id === 'conta' && (input.value === '0000 0000 0000 0000' || input.value.length !== 19)) {
             showError(input);
             return;
         }
@@ -182,6 +182,10 @@ const showDisplay = (input: HTMLInputElement) => {
         spanDate.innerText = `${mes}/${ano}`;
         
     } else {
+        if (input.value === '') {
+            spanCvc.innerText = '000';
+            return;
+        }
         spanCvc.innerText = input.value;
     }
 }
@@ -222,9 +226,9 @@ const formComplet = () => {
             return true;
         });
 
-        const numberCardValid: boolean = inputs[1].value !== '0000 0000 0000 0000';
-
-
+        const numberCardValid: boolean = inputs[1].value !== '0000 0000 0000 0000' &&
+        inputs[1].value.length === 19;
+        
         if (allInputsValid && allNumberInputsFilled && numberCardValid) {
             showMsgComplet();
         }
