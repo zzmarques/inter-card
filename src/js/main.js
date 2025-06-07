@@ -215,4 +215,3 @@ btn.addEventListener('click', () => {
     });
     formComplet();
 });
-//# sourceMappingURL=main.js.map
