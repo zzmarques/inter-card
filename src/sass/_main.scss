@@ -3,9 +3,11 @@
 
 main {
     height: 100vh;
+    display: flex;
+    flex-direction: column;
 
     @include mixins.desktop {
-        display: flex;
+        flex-direction: row;
     }
 
     .container-sec1 {
@@ -14,6 +16,7 @@ main {
         background-image: url('../assets/images/bg-main-mobile.png');
         background-repeat: no-repeat;
         background-size: cover;
+        flex-shrink: 0;
 
         @include mixins.desktop {
             display: flex;
@@ -167,14 +170,16 @@ main {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 100%;
-        
+        flex: 1;
+        padding: 90px 0 30px 0;
+
         @include mixins.desktop {
             justify-content: center;
             height: 100%;
             width: 100%;
             max-width: 884px;
             margin: 0 auto;
+            padding: 0;
         }
 
         .actt-form {
@@ -186,6 +191,10 @@ main {
             @include mixins.desktop {
                 gap: 20px;
                 padding: 0;
+            }
+
+            @include mixins.lp {
+                max-width: 280px;
             }
 
             .form-group {
@@ -278,20 +287,35 @@ main {
                     }
                 }
             }
+        }
 
-            .btn {
-                width: 100%;
-                height: 60px;
-                background-color: vars.$purple-950;
-                border-radius: 8px;
+        .container-complete {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            max-width: 330px;
+            width: 100%;
 
-                font-size: 18px;
-                font-weight: 500;
-                color: vars.$white-color;
-                border: 0;
+            @include mixins.lp {
+                max-width: 280px;
+            }
 
-                @include mixins.desktop {
-                    height: 50px;
+            .container-text {
+                text-align: center;
+
+                h1 {
+                    font-size: 1.8rem;
+                    font-weight: 500;
+                    color: vars.$purple-950;
+                    text-transform: uppercase;
+                    margin-bottom: 10px;
+                }
+
+                h2 {
+                    font-size: 1rem;
+                    font-weight: 500;
+                    color: vars.$gray-400;
                 }
             }
         }
