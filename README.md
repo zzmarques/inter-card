@@ -1,17 +1,15 @@
 # 💳 Inter Card
 
-[![Inter Card Preview](./src/assets/images/inter-card.png.png)](https://wm-inter-card.netlify.app/)
+[![Inter Card Preview](./src/assets/images/inter-card.png)](https://wm-inter-card.netlify.app/)
 
 🔗 [Clique aqui para acessar a demo](https://wm-inter-card.netlify.app/)
 
----
 ## 🧠 Conceito
 
 **Inter Card** é um formulário interativo de cartão de crédito desenvolvido com foco em **experiência do usuário**, **validações em tempo real** e **abordagem Mobile First**.
 
 Este projeto foi implementado com base em um desafio do **Frontend Mentor**, onde o layout é fornecido e o desafio é aplicar lógica, acessibilidade e boas práticas de UI/UX.
 
----
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -19,7 +17,6 @@ Este projeto foi implementado com base em um desafio do **Frontend Mentor**, ond
 - **Sass (SCSS)**: estilização modular, escalável e com responsividade nativa
 - **TypeScript**: controle de tipos e lógica robusta para interações e validações
 
----
 
 ## 📌 Funcionalidades
 
@@ -30,7 +27,6 @@ Este projeto foi implementado com base em um desafio do **Frontend Mentor**, ond
 - ✅ **Verificações específicas** para mês, ano e código de segurança
 - 🎉 **Tela de confirmação** com botão para reiniciar o processo
 
----
 
 ## 🧪 Abordagem
 
